@@ -1,0 +1,90 @@
+.tabbar {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: min(520px, calc(100% - 24px));
+  z-index: 1000;
+}
+
+.tabbar__pill {
+  flex: 1;
+  display: flex;
+  padding: 6px;
+  border: 1px solid var(--colors-blues-blue70);
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(24, 28, 86, 0.18);
+}
+
+.tabbar__tab {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  padding: 6px 0;
+  overflow: hidden;
+  border: none;
+  border-radius: 24px;
+  background: none;
+  color: var(--colors-brand-blue);
+  font: inherit;
+  font-size: 0.6875rem;
+  cursor: pointer;
+}
+
+.tabbar__tab svg {
+  font-size: 1.375rem;
+}
+
+.tabbar__tab.is-active {
+  background: var(--colors-blues-blue80);
+  font-weight: 600;
+}
+
+.tabbar__progress {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--colors-brand-coral);
+  transform-origin: left;
+  transition: transform 0.25s linear;
+}
+
+.tabbar__pause {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--colors-blues-blue70);
+  border-radius: 50%;
+  background: var(--colors-brand-white);
+  color: var(--colors-brand-blue);
+  box-shadow: 0 4px 16px rgba(24, 28, 86, 0.18);
+  cursor: pointer;
+}
+
+.tabbar__pause-icon {
+  width: 10px;
+  height: 12px;
+  border-left: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabbar__progress {
+    transition: none;
+  }
+}

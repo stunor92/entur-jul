@@ -1,0 +1,336 @@
+.tavla {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--colors-misc-black);
+  color: var(--colors-brand-white);
+}
+
+.tavla .snowflake {
+  opacity: 0.35;
+}
+
+.tavla__inner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px 96px;
+}
+
+.tavla__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px 8px;
+}
+
+.tavla__header .entur-logo {
+  font-size: 1.375rem;
+}
+
+.tavla__clock {
+  font-size: 1.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.tavla__tile {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 300px);
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--colors-greys-grey);
+}
+
+.tavla__tile-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 16px;
+}
+
+.tavla__tile-head h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.tavla__walk {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.875rem;
+}
+
+/* Nedtellingsflis */
+.tavla__countdown {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+  padding: 20px 16px 16px;
+  border-radius: 8px;
+  background: var(--colors-greys-grey);
+}
+
+.tavla__countdown h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.tavla__countdown-kicker {
+  font-size: 0.875rem;
+  color: var(--colors-greys-grey60);
+}
+
+.countdown--tavla .countdown__unit {
+  min-width: 84px;
+  background: var(--colors-greys-grey10);
+  border: 1px solid var(--colors-greys-grey20);
+}
+
+.countdown--tavla .countdown__number {
+  font-size: 2.75rem;
+  color: var(--colors-validation-canary);
+}
+
+.tavla__situation {
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+  color: var(--colors-validation-canary);
+}
+
+.tavla__table {
+  width: 100%;
+  margin-top: 12px;
+  border-collapse: collapse;
+}
+
+.tavla__table th {
+  padding: 4px 8px 8px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.tavla__table td {
+  padding: 6px 8px;
+  border-top: 1px solid var(--colors-greys-grey20);
+  vertical-align: middle;
+}
+
+.tavla__col-icon {
+  width: 24px;
+  padding-right: 0 !important;
+}
+
+.tavla__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 72px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--colors-greys-grey);
+}
+
+.tavla__badge svg {
+  color: inherit;
+  width: 20px;
+  height: 20px;
+}
+
+.tavla__badge svg path {
+  fill: currentColor;
+}
+
+.tavla__badge--bus { background: var(--colors-transport-contrast-bus); }
+.tavla__badge--train { background: var(--colors-transport-contrast-train); }
+.tavla__badge--tram { background: var(--colors-transport-contrast-tram); }
+.tavla__badge--metro { background: var(--colors-transport-contrast-metro); }
+.tavla__badge--ferry { background: var(--colors-transport-contrast-ferry); }
+.tavla__badge--flytog { background: var(--colors-data-contrast-lilac); }
+.tavla__badge--snowcoach { background: var(--colors-validation-mint-contrast); }
+
+.tavla__dest {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.tavla__col-platform {
+  text-align: center !important;
+  width: 60px;
+}
+
+.tavla__col-time {
+  text-align: right !important;
+  white-space: nowrap;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.tavla__table th.tavla__col-time {
+  font-size: 0.75rem;
+}
+
+.tavla__warn {
+  color: var(--colors-validation-canary);
+}
+
+.tavla__deviations {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.tavla__deviations p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--colors-validation-canary);
+}
+
+.tavla__page {
+  align-self: flex-end;
+  margin-top: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--colors-validation-canary);
+}
+
+@media (max-width: 600px) {
+  .tavla__tile {
+    padding: 12px 8px;
+  }
+
+  .tavla__countdown h2 {
+    font-size: 1.25rem;
+  }
+
+  .countdown--tavla .countdown__unit {
+    min-width: 0;
+  }
+
+  .countdown--tavla .countdown__number {
+    font-size: 1.75rem;
+  }
+
+  .tavla__table td {
+    padding: 6px 4px;
+  }
+
+  .tavla__dest {
+    font-size: 0.9375rem;
+  }
+
+  .tavla__col-time {
+    font-size: 0.875rem;
+  }
+
+  .tavla__badge {
+    min-width: 0;
+    gap: 4px;
+    padding: 2px 4px;
+    font-size: 0.8125rem;
+  }
+
+  .tavla__badge svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tavla__col-platform {
+    display: none;
+  }
+}
+
+/* Julepynt */
+.tavla .snowflake {
+  opacity: 0.55;
+}
+
+.tavla__lights {
+  display: flex;
+  justify-content: space-between;
+  height: 26px;
+  margin: 0 4px -6px;
+  position: relative;
+  z-index: 1;
+}
+
+.tavla__bulb {
+  position: relative;
+  flex: 1;
+  height: 10px;
+  border-bottom: 2px solid var(--colors-greys-grey30);
+  border-radius: 0 0 50% 50% / 0 0 10px 10px;
+}
+
+.tavla__bulb::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 9px;
+  height: 14px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  transform: translateX(-50%);
+  background: var(--bulb);
+  box-shadow: 0 0 10px 2px var(--bulb);
+  animation: tavla-blink 1.6s ease-in-out infinite;
+  animation-delay: inherit;
+}
+
+.tavla__bulb--coral { --bulb: var(--colors-brand-coral); }
+.tavla__bulb--canary { --bulb: var(--colors-validation-canary); }
+.tavla__bulb--mint { --bulb: var(--colors-validation-mint-contrast); }
+.tavla__bulb--sky { --bulb: var(--colors-validation-sky-contrast); }
+.tavla__bulb--lavender { --bulb: var(--colors-brand-lavender); }
+
+.tavla__tile {
+  position: relative;
+  padding-top: 22px;
+}
+
+/* Snø som har lagt seg på kanten av flisa */
+.tavla__tile::before,
+.tavla__countdown::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  border-radius: 8px 8px 0 0;
+  background:
+    radial-gradient(circle at 12px 5px, #fff 7px, transparent 7.5px) 0 0 / 34px 16px repeat-x,
+    radial-gradient(circle at 6px 4px, #fff 5px, transparent 5.5px) 17px 0 / 46px 16px repeat-x,
+    linear-gradient(#fff, #fff) 0 0 / 100% 6px no-repeat;
+  opacity: 0.95;
+}
+
+@keyframes tavla-blink {
+  50% {
+    opacity: 0.35;
+    box-shadow: 0 0 2px 0 var(--bulb);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tavla__bulb::after {
+    animation: none;
+  }
+}

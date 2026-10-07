@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -15,18 +15,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@entur/alert": "^0.21.3",
     "@entur/button": "^3.3.18",
+    "@entur/chip": "^0.12.0",
+    "@entur/form": "^10.2.1",
     "@entur/icons": "^8.2.0",
     "@entur/layout": "^3.2.2",
+    "@entur/tab": "^0.9.3",
     "@entur/tokens": "^3.20.0",
     "@entur/travel": "^6.4.4",
     "@entur/typography": "^2.0.3",
+    "leaflet": "^1.9.4",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.1.1",
     "gh-pages": "^6.3.0",
-    "vite": "^7.2.2"
+    "vite": "^7.2.2",
+    "vitest": "^5.0.3"
   }
 }

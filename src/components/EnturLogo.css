@@ -1,0 +1,29 @@
+.entur-logo {
+  display: inline-flex;
+  align-items: baseline;
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.5px;
+  color: var(--colors-brand-white);
+  white-space: nowrap;
+}
+
+.entur-logo__en {
+  position: relative;
+}
+
+.entur-logo__en::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: -2px;
+  bottom: -3px;
+  height: 2px;
+  background: var(--colors-brand-coral);
+}
+
+.entur-logo__suffix {
+  margin-left: 6px;
+  font-weight: 500;
+  color: var(--colors-brand-coral);
+}

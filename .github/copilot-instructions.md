@@ -2,12 +2,14 @@
 
 ## Project Overview
 
-Entur-Jul is a Norwegian Christmas countdown website that displays a themed journey from "Entur Kontor" to "Julaften" (Christmas Eve) using a "Polar Express" train metaphor. The website shows a live countdown timer to December 24th and presents the information in an engaging travel booking interface style.
+Entur-Jul is a Norwegian Christmas countdown website styled as Entur pages and apps. A bottom tab bar (like the Entur app) switches between five pages, and the site rotates through them every 5 minutes: Forside (Juleruta – journey details), Avganger (Juletavla – departure board), Billetter (app ticket), Kart (live map of Santa's sleigh) and Profil (Santa's profile). It counts down to the first Sunday of Advent and then to Christmas Eve, and shows one funny deviation message (avvik) per day using Linje's Alert components. The countdown lives on the Avganger page.
 
 **Tech Stack:**
 - React 19.2.0
 - Vite 7.2.2 (build tool)
 - Entur Design System components (@entur/* packages)
+- Leaflet / react-leaflet (map, OpenStreetMap tiles)
+- Vitest (unit tests)
 - Norwegian language (no-NO)
 
 **Purpose:** Display a festive countdown to Christmas Eve with a travel-themed UI using Entur's design system.
@@ -17,9 +19,12 @@ Entur-Jul is a Norwegian Christmas countdown website that displays a themed jour
 ```
 /
 ├── src/
-│   ├── App.jsx          # Main application component with countdown logic
-│   ├── App.css          # Application styles
-│   └── main.jsx         # React application entry point
+│   ├── App.jsx          # Tabs, carousel and page switching
+│   ├── App.css          # Global styles and Entur style imports
+│   ├── main.jsx         # React application entry point
+│   ├── pages/           # One page per tab (Juleruta, Avgangstavle, Billett, Kart, Profil)
+│   ├── components/      # TabBar, SiteHeader, Countdown, Snowfall, EnturLogo
+│   └── lib/             # christmas.js, avvik.js, sleigh.js, useCarousel.js, useNow.js (+ *.test.js)
 ├── index.html           # HTML entry point
 ├── vite.config.js       # Vite configuration
 ├── package.json         # Dependencies and scripts
@@ -40,17 +45,20 @@ Entur-Jul is a Norwegian Christmas countdown website that displays a themed jour
 
 ### Key Technical Details
 
-1. **Date Handling:**
-   - Christmas Eve is December 24th at 00:00:00
-   - If current date is past Dec 24, countdown to next year's Christmas Eve
-   - Use Norwegian locale (no-NO) for date formatting
+1. **Date Handling (`src/lib/christmas.js`):**
+   - Phases: `before-advent` (count down to the first Sunday of Advent) → `advent` (count down to Christmas Eve, Dec 24 00:00) → `christmas` (Dec 24–26) → next year
+   - The first Sunday of Advent is calculated per year
+   - Use Norwegian locale (nb-NO) for date formatting
 
-2. **Countdown Logic:**
-   - Updates every second using setInterval
-   - Calculates days, hours, minutes, and seconds
-   - Shows special message when it's Christmas Eve
+2. **Time and URL parameters:**
+   - `useNow` ticks every second; `?dato=YYYY-MM-DDTHH:mm` simulates another date
+   - `?side=<key>` picks the start page, `?intervall=<seconds>` sets the carousel interval
 
-3. **Responsive Design:**
+3. **Santa's sleigh (`src/lib/sleigh.js`):** a timed route on Christmas Eve; the position is interpolated between stops
+
+4. **Deviation messages (`src/lib/avvik.js`):** one per day; use Linje Alert variants `information`, `success`, `warning`, `negative`
+
+5. **Responsive Design:**
    - Mobile-first approach
    - Use Entur's responsive components
 
@@ -60,7 +68,7 @@ Entur-Jul is a Norwegian Christmas countdown website that displays a themed jour
 npm run dev       # Start development server on port 3000
 npm run build     # Build for production (outputs to dist/)
 npm run preview   # Preview production build
-npm test          # Run tests (currently not configured)
+npm test          # Run unit tests (Vitest)
 ```
 
 ### Development Workflow
@@ -92,10 +100,13 @@ npm test          # Run tests (currently not configured)
 - `@entur/tokens`: Design tokens
 - `@entur/travel`: Travel-specific components (TravelHeader, TravelLeg, TravelTag)
 - `@entur/typography`: Typography components
+- `@entur/alert`, `@entur/chip`, `@entur/form`, `@entur/tab`: Alerts, chips, radio panels, tabs
+- `leaflet` and `react-leaflet`: Map on the Kart page
 
 ### Dev Dependencies
 - `vite`: Build tool and dev server
 - `@vitejs/plugin-react`: React plugin for Vite
+- `vitest`: Unit tests
 
 ## Common Tasks
 
@@ -107,18 +118,18 @@ npm test          # Run tests (currently not configured)
 5. Ensure countdown logic is not affected
 
 ### Modifying Countdown Logic
-- Main countdown logic is in `App.jsx` in the `updateCountdown` function
-- State is managed in `timeLeft` and `isChristmasEve`
-- Updates occur every 1000ms via setInterval
+- Date and phase logic lives in `src/lib/christmas.js` (covered by `christmas.test.js`)
+- The countdown UI is `src/components/Countdown.jsx`
 
 ### Styling Changes
-- Primary styles are in `src/App.css`
+- Each page and component has its own CSS file next to it; global styles are in `src/App.css`
+- Use `@entur/tokens` CSS variables (e.g. `--colors-brand-blue`, `--colors-transport-default-train`) instead of hard-coded colors
 - Use CSS classes that align with Entur's design system
 - Maintain the travel booking aesthetic
 
 ## Important Notes
 
-1. **Christmas Date:** Always December 24th at midnight (00:00:00)
+1. **Christmas Date:** Christmas Eve is December 24th at midnight (00:00:00)
 2. **Locale:** Norwegian (no-NO) for all dates and text
 3. **Theme:** Maintain the "Polar Express" train journey metaphor
 4. **Design System:** Use Entur components; don't introduce custom implementations without good reason
@@ -127,11 +138,10 @@ npm test          # Run tests (currently not configured)
 
 ## Testing Considerations
 
-Currently, there is no test infrastructure (`npm test` returns an error). When adding tests in the future:
-- Focus on countdown calculation logic
-- Test date edge cases (year boundaries, Christmas Eve detection)
-- Test Norwegian locale formatting
-- Consider using React Testing Library
+Unit tests use Vitest (`npm test`) and live next to the code as `*.test.js`:
+- `christmas.test.js` – Advent dates, phases and year boundaries
+- `avvik.test.js` – one deviation per day, valid Alert variants
+- `sleigh.test.js` – Santa's route and position
 
 ## Accessibility
 
@@ -153,4 +163,5 @@ Currently, there is no test infrastructure (`npm test` returns an error). When a
 
 - No sensitive data or API keys should be in the codebase
 - All data is client-side; no backend or data storage
+- The map loads tiles from tile.openstreetmap.org; keep the attribution
 - Dependencies are managed via npm; keep them updated for security patches

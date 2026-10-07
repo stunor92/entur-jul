@@ -1,0 +1,338 @@
+/* Entur-appen: innholdet i en sentrert kolonne */
+.app {
+  min-height: 100vh;
+  background: var(--colors-blues-blue90);
+  color: var(--colors-brand-blue);
+}
+
+.app__frame {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.app__screen {
+  padding: 56px 20px 120px;
+}
+
+.app__info {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  display: inline-flex;
+  padding: 10px;
+  border: 1px solid var(--colors-blues-blue70);
+  border-radius: 50%;
+  background: var(--colors-brand-white);
+  color: var(--colors-brand-blue);
+  font-size: 1.25rem;
+  z-index: 1;
+}
+
+.app__title {
+  margin: 24px 0 24px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Billettkort i listen */
+.app__ticket {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--colors-validation-mint-tint);
+  color: var(--colors-brand-blue);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.app__ticket-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px 16px;
+  font-size: 0.875rem;
+}
+
+.app__ticket-main strong {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.app__ticket-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(26, 142, 96, 0.12);
+  font-size: 0.875rem;
+}
+
+.app__ticket-arrow {
+  margin-left: auto;
+}
+
+.app__ticket.is-inactive {
+  background: var(--colors-blues-blue80);
+}
+
+.app__ticket.is-inactive .app__ticket-foot {
+  background: var(--colors-blues-blue70);
+}
+
+/* Knapper */
+.app__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.app__btn--primary {
+  border: 2px solid var(--colors-brand-blue);
+  background: var(--colors-brand-blue);
+  color: var(--colors-brand-white);
+}
+
+.app__btn--secondary {
+  border: 2px solid var(--colors-blues-blue50);
+  background: transparent;
+  color: var(--colors-brand-blue);
+}
+
+.app__btn--wide {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.app__section {
+  margin: 28px 0 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.app__avvik {
+  margin-bottom: 16px;
+}
+
+/* Gjenta kjøp */
+.app__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: var(--colors-brand-white);
+}
+
+.app__list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  font-size: 0.875rem;
+}
+
+.app__list li + li {
+  border-top: 1px solid var(--colors-blues-blue80);
+}
+
+.app__list li > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.app__list li > span strong {
+  font-weight: 500;
+}
+
+.app__list li > span span {
+  color: var(--colors-blues-blue40);
+}
+
+.app__list-icon {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+}
+
+.app__list-chevron {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.app__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 0.875rem;
+}
+
+/* Kontrollvisning */
+.app__sheet {
+  position: fixed;
+  inset: 0;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 12px 16px;
+  background: var(--colors-blues-blue80);
+  box-shadow: 0 0 0 100vmax rgba(24, 28, 86, 0.6);
+  animation: sheet-in 0.25s ease-out;
+  z-index: 1001;
+}
+
+.app__sheet-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-radius: 16px;
+  background: var(--colors-brand-white);
+}
+
+.app__ticket-head {
+  padding: 20px 20px 16px;
+  background: var(--colors-validation-mint-tint);
+}
+
+.app__ticket-head.is-inactive {
+  background: var(--colors-blues-blue80);
+}
+
+.app__ticket-head h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.app__ticket-type {
+  margin: 4px 0 16px;
+  color: var(--colors-blues-blue40);
+}
+
+.app__ticket-label {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.app__ticket-travellers {
+  margin: 2px 0 16px;
+  font-size: 1.25rem;
+}
+
+.app__ticket-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8125rem;
+}
+
+.app__ticket-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.app__ticket-progress {
+  height: 6px;
+  background: var(--colors-validation-mint-contrast);
+}
+
+.app__ticket-progress span {
+  display: block;
+  height: 100%;
+  background: var(--colors-validation-mint);
+}
+
+.app__ticket-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 16px;
+}
+
+.app__qr {
+  display: grid;
+  grid-template-columns: repeat(25, 6px);
+}
+
+.app__qr span {
+  width: 6px;
+  height: 6px;
+}
+
+.app__qr span.on {
+  background: var(--colors-misc-black);
+}
+
+.app__validation {
+  padding: 14px;
+}
+
+.app__validation-scene {
+  position: relative;
+  width: 122px;
+  height: 122px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--colors-brand-blue), var(--colors-blues-blue20));
+}
+
+.app__validation-tree {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  font-size: 3rem;
+  transform: translateX(-50%);
+  animation: validation-sway 2.4s ease-in-out infinite;
+}
+
+.app__validation-train {
+  position: absolute;
+  bottom: 2px;
+  font-size: 1.25rem;
+  animation: validation-train 5s linear infinite;
+}
+
+.app__sheet-actions {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@keyframes sheet-in {
+  from { transform: translateY(24px); opacity: 0; }
+}
+
+@keyframes validation-sway {
+  0%, 100% { transform: translateX(-50%) rotate(-6deg); }
+  50% { transform: translateX(-50%) rotate(6deg); }
+}
+
+@keyframes validation-train {
+  from { left: -30px; }
+  to { left: 130px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app__validation-tree,
+  .app__validation-train,
+  .app__sheet {
+    animation: none;
+  }
+}

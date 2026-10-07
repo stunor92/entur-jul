@@ -1,0 +1,387 @@
+.detaljer {
+  min-height: 100vh;
+  background: var(--colors-brand-white);
+}
+
+.detaljer__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  min-height: calc(100vh - 64px);
+}
+
+.detaljer__main {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+}
+
+.detaljer__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 24px;
+  font-size: 0.875rem;
+}
+
+.detaljer__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 0.875rem;
+}
+
+.detaljer__meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detaljer__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detaljer__arrived {
+  margin: 24px 0 8px;
+}
+
+.detaljer__columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  margin-top: 32px;
+  align-items: start;
+}
+
+/* Reiseplan */
+.plan__row {
+  display: grid;
+  grid-template-columns: 52px 16px minmax(0, 1fr);
+  column-gap: 12px;
+}
+
+.plan__time {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+.plan__line {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.plan__line::before,
+.plan__line::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 3px;
+  transform: translateX(-50%);
+}
+
+.plan__row--stop .plan__line::before {
+  top: 0;
+  height: 10px;
+}
+
+.plan__row--stop .plan__line::after {
+  top: 10px;
+  bottom: 0;
+}
+
+.plan__line[class*='plan__line--full-']::before {
+  top: 0;
+  bottom: 0;
+}
+
+.plan__line[class*='plan__line--full-']::after {
+  display: none;
+}
+
+/* Linjemønstre: buss stiplet, tog heltrukket, gange prikket */
+.plan__line--above-bus::before,
+.plan__line--below-bus::after,
+.plan__line--full-bus::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--colors-transport-default-bus) 0 6px,
+    transparent 6px 10px
+  );
+}
+
+.plan__line--above-train::before,
+.plan__line--below-train::after,
+.plan__line--full-train::before {
+  background: var(--colors-transport-default-train);
+}
+
+.plan__line--above-walk::before,
+.plan__line--below-walk::after,
+.plan__line--full-walk::before {
+  background: radial-gradient(circle, var(--colors-greys-grey50) 1.5px, transparent 1.6px) center top / 3px 6px repeat-y;
+}
+
+.plan__dot {
+  position: relative;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--colors-brand-white);
+  border: 3px solid currentColor;
+}
+
+.plan__dot--start {
+  color: var(--colors-greys-grey60);
+  background: var(--colors-greys-grey60);
+}
+
+.plan__dot--bus,
+.plan__dot--bus-passed {
+  color: var(--colors-transport-default-bus);
+}
+
+.plan__dot--train,
+.plan__dot--train-passed {
+  color: var(--colors-transport-default-train);
+}
+
+.plan__dot--bus-passed,
+.plan__dot--train-passed {
+  background: currentColor;
+}
+
+.plan__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding-bottom: 20px;
+  min-width: 0;
+}
+
+.plan__content--leg {
+  gap: 10px;
+  padding: 4px 0 24px;
+}
+
+.plan__stop-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.plan__sub,
+.plan__operator,
+.plan__walk {
+  font-size: 0.75rem;
+  color: var(--colors-greys-grey40);
+}
+
+.plan__walk {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.plan__line-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: -6px;
+  font-size: 0.875rem;
+}
+
+.plan__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+}
+
+.plan__count--toggle {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.plan__alert {
+  max-width: 320px;
+}
+
+.plan__mini-stops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.875rem;
+}
+
+.plan__mini-stops li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plan__mini-stops li.is-passed {
+  color: var(--colors-greys-grey40);
+}
+
+.plan__mini-date {
+  min-width: 52px;
+  color: var(--colors-greys-grey40);
+  font-variant-numeric: tabular-nums;
+}
+
+.plan__mini-check {
+  color: var(--colors-validation-mint);
+}
+
+.plan__next {
+  padding: 0 8px;
+  border-radius: 10px;
+  background: var(--colors-brand-coral);
+  color: var(--colors-brand-white);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Billetter-panel */
+.billetter {
+  position: relative;
+  overflow: hidden;
+  background: var(--colors-brand-blue);
+}
+
+.billetter__inner {
+  position: relative;
+  padding: 40px 32px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.billetter__travellers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--colors-brand-white);
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.billetter__travellers span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.billetter__edit {
+  font-weight: 600;
+}
+
+.billetter__leg {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.billetter__valid {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--colors-brand-coral);
+}
+
+.billetter__options {
+  display: grid;
+  gap: 8px;
+}
+
+.billetter__options > *,
+.billetter__leg .eds-radio-panel__wrapper {
+  width: 100%;
+}
+
+.billetter__type {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--colors-brand-peach);
+}
+
+.billetter__operator {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  text-align: right;
+  opacity: 0.8;
+}
+
+.billetter__divider {
+  width: 100%;
+  margin: 8px 0;
+  border: none;
+  border-top: 2px dashed var(--colors-blues-blue30);
+}
+
+.billetter__discount {
+  align-self: flex-start;
+}
+
+.billetter__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--colors-brand-lavender);
+  color: var(--colors-brand-blue);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.billetter__total span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.billetter__report {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 1024px) {
+  .detaljer__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detaljer__columns {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .detaljer__main {
+    padding: 16px 16px 48px;
+  }
+
+  .billetter__inner {
+    padding: 32px 16px 96px;
+  }
+}

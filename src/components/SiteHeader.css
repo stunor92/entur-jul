@@ -1,0 +1,38 @@
+.site-header {
+  position: relative;
+  overflow: hidden;
+  border-top: 8px solid var(--colors-brand-coral);
+  background: var(--colors-brand-blue);
+  color: var(--colors-brand-white);
+}
+
+.site-header__bar {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.site-header__nav {
+  display: flex;
+  gap: 24px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.site-header__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .site-header__item--wide {
+    display: none;
+  }
+}

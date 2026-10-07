@@ -1,33 +1,43 @@
 # 🎄 Entur-Jul - Polar Express til Julaften
 
-A festive Christmas countdown website styled as an Entur (Norwegian public transport) journey planner. Track your journey from today to Christmas Eve aboard the magical Polar Express! 🚂✨
+A festive Christmas countdown website styled as Entur (Norwegian public transport) pages and apps. Track your journey from the office to Christmas Eve aboard the Polar Express, follow Santa's sleigh in real time, and read a new (fake) traffic deviation every day! 🚂✨
 
 ## 📖 About
 
-This interactive web application presents a countdown to Christmas Eve (December 24th) in the style of an Entur train journey. It features:
+The site is built like the Entur app: a bottom tab bar switches between five pages, and the site rotates through them automatically (5 minutes per page) so it works as an office info screen.
 
-- **Real-time countdown** to Christmas Eve with days, hours, minutes, and seconds
-- **Journey visualization** styled like a real Entur train itinerary
-- **Interactive travel card** showing departure and arrival information
-- **Dynamic messages** that change based on how close Christmas is
-- **Festive design** using Entur's official design system components
+| Tab | Page | Styled like |
+|-----|------|-------------|
+| Forside | **Juleruta** – the journey from "Kontoret" to "Julaften" with advent stops, today's deviation and a ticket panel | entur.no "Detaljer om reisen" |
+| Avganger | **Juletavla** – the countdown plus a departure board with Christmas departures, deviations and string lights | Entur Tavla |
+| Billetter | **Billetter** – the Christmas ticket with countdown, QR code and ticket inspection view | Entur app tickets |
+| Kart | **Sanntid i kart** – live tracking of Santa's sleigh from the North Pole on Christmas Eve | Entur app real-time map |
+| Profil | **Min profil** – Santa's profile with travel statistics | Entur app profile |
 
 ## ✨ Features
 
-- 🕐 **Live Countdown Timer** - Real-time countdown to Christmas Eve (24. desember)
-- 🚂 **Train Journey Visualization** - Styled as a Polar Express journey from "Entur Kontor" to "Julaften"
-- 🎨 **Entur Design System** - Uses official Entur UI components for authentic look and feel
-- 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
-- 🎅 **Dynamic Messages** - Contextual messages based on time remaining until Christmas
-- ⭐ **Amenities Display** - Shows train amenities (WiFi, Café, Toilet)
-- 🎁 **Christmas Day Detection** - Special message when Christmas Eve arrives
+- 🕐 **Two-phase countdown** – counts down to the first Sunday of Advent, then to Christmas Eve (24. desember). The first Sunday of Advent is calculated for every year.
+- 🚧 **Daily deviation messages** – a funny traffic deviation every day (its own for each day December 1–24), shown with Linje's Alert components
+- 🛷 **Live sleigh tracking** – on Christmas Eve the sleigh flies a timed route from the North Pole via Norway and around the world
+- 🔁 **Carousel** – pages rotate every 5 minutes; tapping a tab jumps there and restarts the timer, and the rotation can be paused
+- ❄️ **Snow and Christmas lights** – with `prefers-reduced-motion` respected
+- 🎨 **Entur Design System** – Linje components and tokens throughout
+- 📱 **Responsive** – works on phones, desktops and large office screens
+
+## 🔗 URL parameters
+
+| Parameter | Example | Effect |
+|-----------|---------|--------|
+| `side` | `?side=kart` | Start on a specific page (`forside`, `avganger`, `billetter`, `kart`, `profil`) |
+| `intervall` | `?intervall=10` | Seconds per page in the carousel (default 300) |
+| `dato` | `?dato=2026-12-24T17:20` | Pretend it is another date/time, for testing |
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (version 14 or higher)
-- npm or yarn package manager
+- Node.js (version 18 or higher)
+- npm
 
 ### Installation
 
@@ -51,6 +61,13 @@ npm run dev
 
 The application will be available at `http://localhost:3000`
 
+### Tests
+
+Run the unit tests (date logic, deviation messages and sleigh route):
+```bash
+npm test
+```
+
 ### Build
 
 Create a production build:
@@ -60,67 +77,53 @@ npm run build
 
 The built files will be in the `dist/` directory.
 
-### Preview Production Build
-
-Preview the production build locally:
-```bash
-npm run preview
-```
-
 ## 🛠️ Technology Stack
 
-- **React 19** - UI framework
-- **Vite** - Build tool and development server
-- **Entur Design System** - Official Entur UI components
-  - `@entur/button` - Button components
-  - `@entur/icons` - Icon library
-  - `@entur/layout` - Layout components
-  - `@entur/tokens` - Design tokens
-  - `@entur/travel` - Travel-specific components
-  - `@entur/typography` - Typography components
+- **React 19** – UI framework
+- **Vite** – Build tool and development server
+- **Vitest** – Unit tests
+- **Leaflet / react-leaflet** – Map with OpenStreetMap tiles
+- **Entur Design System (Linje)**
+  - `@entur/alert` – BannerAlertBox/SmallAlertBox for deviation messages
+  - `@entur/button`, `@entur/chip`, `@entur/form`, `@entur/tab` – Components
+  - `@entur/icons` – Icon library
+  - `@entur/layout` – Layout components and badges
+  - `@entur/tokens` – Design tokens (colors, transport colors)
+  - `@entur/travel` – Travel components (TravelHeader, TravelTag)
+  - `@entur/typography` – Typography and the Nationale font
 
 ## 📁 Project Structure
 
 ```
 Entur-Jul/
 ├── src/
-│   ├── App.jsx          # Main application component
-│   ├── App.css          # Application styles
-│   └── main.jsx         # Application entry point
-├── index.html           # HTML template
-├── vite.config.js       # Vite configuration
-├── package.json         # Project dependencies and scripts
-└── README.md           # This file
+│   ├── App.jsx              # Tabs, carousel and page switching
+│   ├── App.css              # Global styles and Entur style imports
+│   ├── main.jsx             # Application entry point
+│   ├── pages/               # One page per tab
+│   │   ├── Juleruta.jsx     # Forside
+│   │   ├── Avgangstavle.jsx # Avganger
+│   │   ├── Billett.jsx      # Billetter
+│   │   ├── Kart.jsx         # Kart
+│   │   └── Profil.jsx       # Profil
+│   ├── components/          # TabBar, SiteHeader, Countdown, Snowfall, EnturLogo
+│   └── lib/
+│       ├── christmas.js     # Advent/Christmas dates and countdown
+│       ├── avvik.js         # Daily deviation messages
+│       ├── sleigh.js        # Santa's route and live position
+│       ├── useCarousel.js   # Page rotation
+│       └── useNow.js        # Ticking clock (supports ?dato=)
+├── index.html
+├── vite.config.js
+└── package.json
 ```
 
 ## 📜 Available Scripts
 
-- `npm run dev` - Start development server on port 3000
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-
-## 🎯 How It Works
-
-The application calculates the time remaining until December 24th at 00:00:00 and displays it as:
-
-1. A countdown timer showing days, hours, minutes, and seconds
-2. A styled train journey from "Entur Kontor" to "Julaften"
-3. Dynamic messages that update based on proximity to Christmas:
-   - Standard message when Christmas is far away
-   - "Only one day until departure!" when 1 day remains
-   - "Today the Polar Express departs!" on Christmas Eve
-   - "Train departing soon!" when less than 1 hour remains
-
-If Christmas Eve has passed, the countdown automatically targets next year's Christmas.
-
-## 🎨 Design
-
-The project uses the official Entur design system to create an authentic Norwegian public transport experience. The design includes:
-
-- Entur's brand logo and colors
-- Travel-specific UI components (TravelHeader, TravelLeg, TravelTag)
-- Navigation cards for information display
-- Official typography and icon sets
+- `npm run dev` – Start development server on port 3000
+- `npm test` – Run unit tests
+- `npm run build` – Build for production
+- `npm run preview` – Preview production build locally
 
 ## 🌐 Language
 
