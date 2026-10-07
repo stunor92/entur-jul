@@ -6,8 +6,9 @@ function TabBar({ tabs, index, onSelect, progress, paused, onTogglePause }) {
   return (
     <div className="tabbar">
       <nav className="tabbar__pill" aria-label="Hovedmeny">
-        {tabs.map(({ key, label, Icon }, i) => {
+        {tabs.map(({ key, label, Icon, ActiveIcon }, i) => {
           const active = i === index;
+          const TabIcon = active ? ActiveIcon : Icon;
           return (
             <button
               key={key}
@@ -15,7 +16,7 @@ function TabBar({ tabs, index, onSelect, progress, paused, onTogglePause }) {
               aria-current={active ? 'page' : undefined}
               onClick={() => onSelect(i)}
             >
-              <Icon aria-hidden="true" />
+              <TabIcon aria-hidden="true" />
               {label}
               {active && !paused && (
                 <span className="tabbar__progress" style={{ transform: `scaleX(${progress})` }} />

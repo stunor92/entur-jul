@@ -106,7 +106,7 @@ Entur-Jul/
 │   │   ├── Billett.jsx      # Billetter
 │   │   ├── Kart.jsx         # Kart
 │   │   └── Profil.jsx       # Profil
-│   ├── components/          # TabBar, SiteHeader, Countdown, Snowfall, EnturLogo
+│   ├── components/          # TabBar, Countdown, Snowfall, EnturLogo
 │   └── lib/
 │       ├── christmas.js     # Advent/Christmas dates and countdown
 │       ├── avvik.js         # Daily deviation messages

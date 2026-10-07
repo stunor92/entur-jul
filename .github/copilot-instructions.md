@@ -23,7 +23,7 @@ Entur-Jul is a Norwegian Christmas countdown website styled as Entur pages and a
 │   ├── App.css          # Global styles and Entur style imports
 │   ├── main.jsx         # React application entry point
 │   ├── pages/           # One page per tab (Juleruta, Avgangstavle, Billett, Kart, Profil)
-│   ├── components/      # TabBar, SiteHeader, Countdown, Snowfall, EnturLogo
+│   ├── components/      # TabBar, Countdown, Snowfall, EnturLogo
 │   └── lib/             # christmas.js, avvik.js, sleigh.js, useCarousel.js, useNow.js (+ *.test.js)
 ├── index.html           # HTML entry point
 ├── vite.config.js       # Vite configuration

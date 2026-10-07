@@ -23,7 +23,6 @@ import {
   CheckIcon,
   DownArrowIcon,
 } from '@entur/icons';
-import SiteHeader from '../components/SiteHeader';
 import Snowfall from '../components/Snowfall';
 import { getStops, formatDate } from '../lib/christmas';
 import { getDailyAvvik } from '../lib/avvik';
@@ -85,8 +84,6 @@ function Juleruta({ now, season }) {
 
   return (
     <div className="detaljer">
-      <SiteHeader />
-
       <div className="detaljer__layout">
         <main className="detaljer__main">
           <Link href="#" className="detaljer__back">
